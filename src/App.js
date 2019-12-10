@@ -1,26 +1,64 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+import Header from "./components/Header"
+import MainPage from "./components/MainPage"
+import CreatePoll from "./components/CreatePoll"
+import JoinPoll from "./components/JoinPoll"
+import Content from "./components/Content"
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+  constructor(){
+    super();
+    this.state = {
+      current_page: "main",
+      client_id: ""
+    }
+  }
+
+  createPollPage = () => {
+    this.setState({
+      current_page: "create_poll"
+    })
+  }
+  
+  joinPollPage = async (client_id) => {
+    this.setState({
+      current_page: "join_poll",
+      client_id: client_id
+    })
+  }
+
+  selectPage = () => {
+    switch(this.state.current_page){
+      case "main":
+          return (
+            <MainPage 
+              createPoll={this.createPollPage}
+              joinPollPage={this.joinPollPage}
+            />
+          );
+        case "create_poll":
+          return (
+            <CreatePoll/>
+          );
+        case "join_poll":
+          return (
+            <JoinPoll 
+              client_id={this.state.client_id}
+            />
+          )
+    }
+
+  }
+
+  render = () => {
+    return (
+      <div className="App">
+        <Header/>
+        <Content children={this.selectPage()}/>
+      </div>
+    )
+  }
 }
 
 export default App;
