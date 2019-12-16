@@ -16,7 +16,7 @@ class MainPage extends Component{
     handleChange = (e) => {
         const {target: {value}} = e;
         this.setState({
-            vote_id: value
+            input_client_id: value
         });
     }
 

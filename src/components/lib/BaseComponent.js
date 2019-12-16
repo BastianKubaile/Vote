@@ -5,9 +5,12 @@ class BaseComponent extends Component{
         super(props);
     }
 
-    handleChangeWithID = (e) => {
+    handleChangeWithID = (e, state_attrib) => {
         const {target: {id, value}} = e;
-        let currentState = this.state.poll;
+        let currentState = this.state;
+        if(state_attrib !== undefined){
+            currentState = currentState[state_attrib];
+        }
         if(typeof currentState[id] == "boolean"){
             //Toggle the value
             currentState[id] = !currentState[id];

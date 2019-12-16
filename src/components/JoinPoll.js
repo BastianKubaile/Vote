@@ -19,6 +19,7 @@ class JoinPoll extends Component{
         })
         .then(res => res.json())
         .then(json => {
+            json.submittable = true;
             this.setState({poll: json})
         });
     }
@@ -30,7 +31,7 @@ class JoinPoll extends Component{
     render = () => (
         <div className="joinPoll">
             {this.state.poll && 
-                <Poll poll={this.state.poll} submittable={true} submitPoll={this.submitPoll}/>
+                <Poll poll={this.state.poll} submitPoll={this.submitPoll}/>
             }
         </div>
     )

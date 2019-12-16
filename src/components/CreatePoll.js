@@ -9,7 +9,14 @@ class CreatePoll extends BaseComponent{
         this.state = {
             submitted_id: "",
             submitted: false,
-            poll: new Poll()
+            answer: "",
+            poll: {
+                question: "",
+                answers: [],
+                multipleChoice: false,
+                submittable: false,
+                editable: true
+            }
         }
     }
 
@@ -33,13 +40,35 @@ class CreatePoll extends BaseComponent{
 
     addAnswer = (e) => {
         e.preventDefault();
-        let temp = this.state.poll.answer;
-        let currentState = this.state.poll;
-        currentState.answers = [... currentState.answers, temp];
+        let current_poll = this.state.poll;
+        current_poll.answers = [... current_poll.answers, 
+            {"name": this.state.answer, "correct_answer": false}
+        ];
+        this.setState({poll: current_poll})
+    }
+
+    deleteAnswer = (e, key) => {
+        let current_poll = this.state.poll;
+        current_poll.answers = [
+            ... current_poll.answers.slice(0, key),
+            ... current_poll.answers.slice(key+1, current_poll.answers.length)
+        ];
         this.setState({
-            poll: currentState
+            poll: current_poll
         });
-        return;
+    }
+
+    toggleCorrectAnswer = (e, key) => {
+        let current_poll = this.state.poll;
+        let current_answer = current_poll.answers[key];
+        current_poll.answers =[
+            ... current_poll.answers.slice(0,key),
+            {"name": current_answer.name, "correct_answer":       !current_answer.correct_answer},
+            ... current_poll.answers.slice(key+1, current_poll.answers.length)
+        ];
+        this.setState({
+            poll: current_poll
+        });
     }
 
     setQuestion = (e) => {
@@ -54,22 +83,27 @@ class CreatePoll extends BaseComponent{
                     <form onSubmit={this.setQuestion}>
                         <input id="question" 
                             value={this.state.poll.question}
-                            onChange={this.handleChangeWithID}>
+                            onChange={(e) => this.handleChangeWithID(e, "poll")}>
                         </input>
                         <button>Set question</button>
                     </form>
                     <form onSubmit={this.addAnswer}>
                         <input id="answer" 
-                            value={this.state.poll.answer}
-                            onChange={this.handleChangeWithID}></input>
+                            value={this.state.answer}
+                            onChange={(e) => this.handleChangeWithID(e)}></input>
                         <button>Add a new Answer</button> 
                     </form>
                     <label>
                         <input type="checkbox" id="multipleChoice" 
-                        onChange={this.handleChangeWithID}></input>
+                        onChange={(e) => this.handleChangeWithID(e, "poll")}></input>
                         Multiplechoice
                     </label>
-                    {this.state.poll}
+                    <Poll poll={Object.assign(this.state.poll, {
+                        createPoll: this.createPoll,
+                        toggleCorrectAnswer: this.toggleCorrectAnswer,
+                        deleteAnswer: this.deleteAnswer
+
+                    })}/>
                     <form onSubmit={this.createPoll}>
                         <button>Create New Poll</button>
                     </form>
