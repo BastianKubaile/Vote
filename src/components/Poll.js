@@ -17,7 +17,6 @@ class Poll extends Component{
             toggleCorrectAnswer,
             deleteAnswer
         } = this.props.poll;
-        alert(submittable);
         return(
             <div className="Poll">
                 <h3>{question}</h3>
@@ -30,7 +29,7 @@ class Poll extends Component{
                                 </li>
                                 {editable && 
                                 <label>
-                                    <input type="checkbox" 
+                                    <input type={multipleChoice?"checkbox":"radio"} 
                                     key={key}
                                     onChange={(e) => 
                                     toggleCorrectAnswer(e, key)}

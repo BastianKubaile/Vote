@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Header from "./components/Header"
 import MainPage from "./components/MainPage"
-import CreatePoll from "./components/CreatePoll"
+import EditPoll from "./components/EditPoll"
 import JoinPoll from "./components/JoinPoll"
 import Content from "./components/Content"
 import './App.css';
@@ -39,7 +39,7 @@ class App extends Component{
           );
         case "create_poll":
           return (
-            <CreatePoll/>
+            <EditPoll/>
           );
         case "join_poll":
           return (

@@ -3,26 +3,27 @@ import BaseComponent from "./lib/BaseComponent"
 import Poll from "./Poll"
 import settings from "../config"
 
-class CreatePoll extends BaseComponent{
-    constructor(){
-        super();
+class EditPoll extends BaseComponent{
+    constructor(props){
+        super(props);
+        let initalpoll = this.props.poll? this.props.poll:{
+            question: "",
+            answers: [],
+            multipleChoice: false,
+            submittable: false,
+            editable: true
+        };
         this.state = {
-            submitted_id: "",
             submitted: false,
+            client_id: "",
+            secret_id: "",
             answer: "",
-            poll: {
-                question: "",
-                answers: [],
-                multipleChoice: false,
-                submittable: false,
-                editable: true
-            }
+            poll: initalpoll
         }
     }
 
     createPoll = (e) => {
         e.preventDefault();
-        console.log(this.state.poll);
         fetch(settings.server_url +  "poll/", {
             method: "post",
             headers: {"Content-Type": "application/json"},
@@ -32,9 +33,9 @@ class CreatePoll extends BaseComponent{
         .then(json => {
             this.setState({
                 submitted: true,
-                submitted_id: json.client_id
+                client_id: json.client_id,
+                secret_id: json.secret_id
             })
-            console.log(json);
         });
     }
 
@@ -77,7 +78,7 @@ class CreatePoll extends BaseComponent{
     
     render(){
         return (
-            <div className="createPoll">
+            <div className="editPoll">
                 {!this.state.submitted && 
                 <>
                     <form onSubmit={this.setQuestion}>
@@ -112,11 +113,16 @@ class CreatePoll extends BaseComponent{
                 {this.state.submitted && 
                 <>
                     <h3>
-                        The Poll has the ID <strong>{this.state.submitted_id}</strong></h3>
+                        The Poll has the ID <strong>{this.state.client_id}</strong>
+                    </h3>
+                    <h3>
+                        To edit the Poll use this <strong>{this.state.secret_id}
+                        </strong> Secret ID.
+                    </h3>
                 </>}
             </div>
         )
     }
 }
 
-export default CreatePoll;
+export default EditPoll;

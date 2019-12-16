@@ -8,8 +8,8 @@ class MainPage extends Component{
         }
     }
     
-    handleSubmit = (e) => {
-        e.preventDefault();
+        handleSubmit = (e) => {
+            e.preventDefault();
         this.props.joinPollPage(this.state.input_client_id);
     }
 

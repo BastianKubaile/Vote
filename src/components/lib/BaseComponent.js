@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import settings from "../../config"
 
 class BaseComponent extends Component{
     constructor(props){
@@ -18,6 +19,17 @@ class BaseComponent extends Component{
             currentState[id] = value;
         }
         this.setState(currentState);
+    }
+
+    fetch_poll = (id, callback) => {
+        fetch(settings.server_url + `poll/${id}`, {
+            method: "get",
+            headers: {"Content-Type": "application/json"}
+        })
+        .then(res => res.json())
+        .then(json => {
+            callback(json);
+        });
     }
 }
 
