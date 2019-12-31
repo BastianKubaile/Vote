@@ -28,6 +28,7 @@ class BaseComponent extends Component{
         })
         .then(res => res.json())
         .then(json => {
+            json.end_date = new Date(json.end_date);
             callback(json);
         });
     }

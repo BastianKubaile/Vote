@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import "./mainpage.scss"
 
 class MainPage extends Component{
     constructor(props){
@@ -26,11 +27,13 @@ class MainPage extends Component{
                 <form onSubmit={this.handleSubmit}>
                     <input 
                         value={this.state.input_client_id}
-                        onChange={this.handleChange}>
+                        onChange={this.handleChange}
+                        className="textinput txtinput"
+                        placeholder="Public or Secret ID">
                     </input>
-                    <button>Join this Vote</button>
+                    <button id="joinPoll" className="btn">Join this Vote</button>
                 </form>
-                <button onClick={this.props.createPoll}>Create a new Poll</button>
+                <button onClick={this.props.createPoll} id="newPoll" className="btn">Create a new Poll</button>
             </div>
         )
     }

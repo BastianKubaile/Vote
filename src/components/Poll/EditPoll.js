@@ -1,7 +1,10 @@
 import React from "react"
-import BaseComponent from "./lib/BaseComponent"
+import BaseComponent from "../lib/BaseComponent"
 import Poll from "./Poll"
-import settings from "../config"
+import settings from "../../config"
+import DateTimePicker from "react-datetime-picker";
+import PollStats from "../PollStats"
+import "./editpoll.scss"
 
 class EditPoll extends BaseComponent{
     constructor(props){
@@ -11,7 +14,9 @@ class EditPoll extends BaseComponent{
             answers: [],
             multipleChoice: false,
             submittable: false,
-            editable: true
+            editable: true,
+            end_date: new Date(),
+            submitions: []
         };
         this.state = {
             submitted: false,
@@ -75,36 +80,54 @@ class EditPoll extends BaseComponent{
     setQuestion = (e) => {
         e.preventDefault();
     }
+
+    handleDateChange = end_date => {
+        let current_poll = this.state.poll;
+        current_poll.end_date = end_date;
+        this.setState({poll: current_poll});
+    }
     
     render(){
         return (
             <div className="editPoll">
                 {!this.state.submitted && 
                 <>
-                    <form onSubmit={this.setQuestion}>
-                        <input id="question" 
-                            value={this.state.poll.question}
-                            onChange={(e) => this.handleChangeWithID(e, "poll")}>
-                        </input>
-                        <button>Set question</button>
-                    </form>
-                    <form onSubmit={this.addAnswer}>
-                        <input id="answer" 
-                            value={this.state.answer}
-                            onChange={(e) => this.handleChangeWithID(e)}></input>
-                        <button>Add a new Answer</button> 
-                    </form>
-                    <label>
-                        <input type="checkbox" id="multipleChoice" 
-                        onChange={(e) => this.handleChangeWithID(e, "poll")}></input>
-                        Multiplechoice
-                    </label>
+                    <div className="editPoll">
+                        <h3>Edit your Poll</h3>
+                        <form onSubmit={this.setQuestion}>
+                            <input id="question" 
+                                value={this.state.poll.question}
+                                onChange={(e) => this.handleChangeWithID(e, "poll")}
+                                className="txtinput">
+                            </input>
+                            <button className="btn">Set question</button>
+                        </form>
+                        <form onSubmit={this.addAnswer}>
+                            <input id="answer" 
+                                value={this.state.answer}
+                                onChange={(e) => this.handleChangeWithID(e)}
+                                className="txtinput"></input>
+                            <button className="btn">Add a new Answer</button> 
+                        </form>
+                        <div className="datetimepicker">
+                            <DateTimePicker 
+                                value={this.state.poll.end_date}
+                                onChange={this.handleDateChange}
+                            />
+                        </div>
+                        <label>
+                            <input type="checkbox" id="multipleChoice" 
+                            onChange={(e) => this.handleChangeWithID(e, "poll")}></input>
+                            Multiplechoice
+                        </label>
+                    </div>
                     <Poll poll={Object.assign(this.state.poll, {
                         createPoll: this.createPoll,
                         toggleCorrectAnswer: this.toggleCorrectAnswer,
                         deleteAnswer: this.deleteAnswer
 
                     })}/>
+                    <PollStats submitions={this.state.poll.submitions}/>
                     <form onSubmit={this.createPoll}>
                         <button>Create New Poll</button>
                     </form>

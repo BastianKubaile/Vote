@@ -25,3 +25,20 @@
     transform: rotate(360deg);
   }
 }
+
+.txtinput{
+  width: 300px;
+  height: 20px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px gray;
+}
+
+.btn{
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px gray;
+  background-color: white;
+  min-width: 150px;
+  height: 20px;
+}

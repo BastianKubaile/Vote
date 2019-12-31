@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import Header from "./components/Header"
 import MainPage from "./components/MainPage"
-import EditPoll from "./components/EditPoll"
-import JoinPoll from "./components/JoinPoll"
+import EditPoll from "./components/Poll/EditPoll"
+import JoinPoll from "./components/Poll/JoinPoll"
 import Content from "./components/Content"
 import './App.css';
 

@@ -1,0 +1,42 @@
+.Poll{
+    ul{
+        list-style-type: none;
+    }
+
+    li * {
+        display: block;
+    }
+
+    li input{
+        display: inline;
+    }
+
+    li label p{
+        display: inline;
+    }
+
+    li label i{
+        display: inline;
+    }
+
+    li label i:hover{
+        color: #af0c0c;
+    }
+
+    .answer, .options{
+        display: inline-block;
+        height: 100%;
+    }
+
+    .answer{
+        width: 200px;
+    }
+
+    .options{
+        width: 300px;
+    }
+
+    li{
+        margin-top: 20px;
+    }
+}
