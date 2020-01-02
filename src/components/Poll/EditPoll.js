@@ -3,7 +3,7 @@ import BaseComponent from "../lib/BaseComponent"
 import Poll from "./Poll"
 import settings from "../../config"
 import DateTimePicker from "react-datetime-picker";
-import PollStats from "../PollStats"
+import PollStats from "./PollStats"
 import "./editpoll.scss"
 
 class EditPoll extends BaseComponent{
@@ -23,6 +23,7 @@ class EditPoll extends BaseComponent{
             client_id: "",
             secret_id: "",
             answer: "",
+            poll_exists: this.props.poll? true: false,
             poll: initalpoll
         }
     }
@@ -129,7 +130,7 @@ class EditPoll extends BaseComponent{
                     })}/>
                     <PollStats submitions={this.state.poll.submitions}/>
                     <form onSubmit={this.createPoll}>
-                        <button>Create New Poll</button>
+                        <button className="btn" id="submitbtn">{this.state.poll_exists?"Update Poll":"Create New Poll"}</button>
                     </form>
                 </>
                 }

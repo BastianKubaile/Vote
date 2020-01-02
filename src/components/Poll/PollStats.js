@@ -1,7 +1,8 @@
 import React from "react";
-import BaseComponent from "./lib/BaseComponent";
-import '../../node_modules/react-vis/dist/style.css';
+import BaseComponent from "../lib/BaseComponent";
+import '../../../node_modules/react-vis/dist/style.css';
 import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, HorizontalBarSeries, VerticalBarSeries} from 'react-vis';
+import "./pollstats.scss"
 
 class PollStats extends BaseComponent{
     constructor(props){
