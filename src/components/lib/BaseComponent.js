@@ -1,11 +1,7 @@
-import React, {Component} from "react"
+import {Component} from "react"
 import settings from "../../config"
 
 class BaseComponent extends Component{
-    constructor(props){
-        super(props);
-    }
-
     handleChangeWithID = (e, state_attrib) => {
         const {target: {id, value}} = e;
         let currentState = this.state;

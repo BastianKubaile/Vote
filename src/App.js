@@ -30,23 +30,24 @@ class App extends Component{
 
   selectPage = () => {
     switch(this.state.current_page){
+      case "create_poll":
+        return (
+          <EditPoll/>
+        );
+      case "join_poll":
+        return (
+          <JoinPoll 
+          client_id={this.state.client_id}
+          />
+        )
       case "main":
-          return (
-            <MainPage 
-              createPoll={this.createPollPage}
-              joinPollPage={this.joinPollPage}
-            />
-          );
-        case "create_poll":
-          return (
-            <EditPoll/>
-          );
-        case "join_poll":
-          return (
-            <JoinPoll 
-              client_id={this.state.client_id}
-            />
-          )
+      default:
+        return (
+          <MainPage 
+          createPoll={this.createPollPage}
+          joinPollPage={this.joinPollPage}
+          />
+        );
     }
 
   }

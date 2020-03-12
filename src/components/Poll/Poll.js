@@ -3,9 +3,6 @@ import Countdown from "react-countdown-now";
 import "./poll.scss"
 
 class Poll extends Component{
-    constructor(props){
-        super(props);
-    }
 
     render(){
         const{
@@ -16,8 +13,7 @@ class Poll extends Component{
             multipleChoice,
             toggleCorrectAnswer,
             deleteAnswer,
-            end_date,
-            submitions
+            end_date
         } = this.props.poll;
         const {
             selectAnswer,
@@ -28,7 +24,7 @@ class Poll extends Component{
                 <h3>{question}</h3>
                 <form onSubmit={submitPoll}>
                     <ul>
-                        {answers.map((answer, key) => (
+                        {answers && answers.map((answer, key) => (
                             <li key={key}>
                                 <div className="answer">
                                     <p>{answer.name}</p>
@@ -73,6 +69,6 @@ class Poll extends Component{
             </div>
         );
     }
-}
+    }
 
 export default Poll;

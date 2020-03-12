@@ -48,7 +48,7 @@ class EditPoll extends BaseComponent{
     addAnswer = (e) => {
         e.preventDefault();
         let current_poll = this.state.poll;
-        current_poll.answers = [... current_poll.answers, 
+        current_poll.answers = [...current_poll.answers, 
             {"name": this.state.answer, "correct_answer": false}
         ];
         this.setState({poll: current_poll})
@@ -57,8 +57,8 @@ class EditPoll extends BaseComponent{
     deleteAnswer = (e, key) => {
         let current_poll = this.state.poll;
         current_poll.answers = [
-            ... current_poll.answers.slice(0, key),
-            ... current_poll.answers.slice(key+1, current_poll.answers.length)
+            ...current_poll.answers.slice(0, key),
+            ...current_poll.answers.slice(key+1, current_poll.answers.length)
         ];
         this.setState({
             poll: current_poll
@@ -69,9 +69,9 @@ class EditPoll extends BaseComponent{
         let current_poll = this.state.poll;
         let current_answer = current_poll.answers[key];
         current_poll.answers =[
-            ... current_poll.answers.slice(0,key),
+            ...current_poll.answers.slice(0,key),
             {"name": current_answer.name, "correct_answer":       !current_answer.correct_answer},
-            ... current_poll.answers.slice(key+1, current_poll.answers.length)
+            ...current_poll.answers.slice(key+1, current_poll.answers.length)
         ];
         this.setState({
             poll: current_poll
