@@ -12,13 +12,20 @@
     "react-datetime-picker": "^2.8.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0",
-    "react-vis": "^1.11.7"
+    "react-vis": "^1.11.7",
+    "test-listen": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "ava",
     "eject": "react-scripts eject"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.js"
+    ],
+    "babel": true
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -34,5 +41,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@ava/babel": "^1.0.1",
+    "ava": "^3.5.0",
+    "got": "^10.6.0"
   }
 }
