@@ -1,9 +1,10 @@
 import React, {Component} from "react"
 import Countdown from "react-countdown-now";
 import "./poll.scss"
+import "./general.scss"
 
 const render_countdown = (props) => {
-    var {total, days, hours, minutes, seconds, milliseconds, completed} = props;
+    var {days, hours, minutes, seconds, completed} = props;
     console.log(props);
     if(completed){
         return(
@@ -99,7 +100,7 @@ class Poll extends Component{
                     </ul>
                     {submittable &&
                     <> 
-                        <button id="submitButton">Submit</button>
+                        <button className="submitButton">Submit</button>
                         <Countdown 
                             date={end_date}
                             renderer={render_countdown}/>
